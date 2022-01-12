@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, FlatList } from 'react-native';
 import { Navbar } from './src/Navbar';
 import { AppTodo } from './src/AppTodo';
 import { Todo } from './src/Todo';
@@ -18,10 +18,19 @@ export default function App() {
 
   return (
     <View style={styles.container}>
+      <StatusBar 
+        animated={true}
+        hidden={false}
+        statusBarStyle='dark-content'
+      />
       <Navbar title="Todo App!"/>
-      <View>
+      <View style={styles.wrappListContainer}>
         <AppTodo onSubmit={addTodo}/>
-        <Todo todos={todos}/>
+        <FlatList
+          keyExtractor={item => item.id.toString()}
+          data={todos}
+          renderItem={({item}) => <Todo title={item.title}/>}
+        />
       </View>
     </View>
   );
@@ -31,5 +40,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#06251E',
+  },
+  wrappListContainer: {
+    maxHeight: '80%',
+    justifyContent: 'center', 
+    alignItems: 'center'
   }
 });
