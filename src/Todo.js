@@ -16,7 +16,7 @@ export const Todo = ({ title }) => {
 
 const styles = StyleSheet.create({
   todo: {
-    width: 333,
+    width: 350,
     height: 50,
     flexDirection: 'row',
     justifyContent: 'flex-start',
@@ -25,5 +25,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     marginTop: 5,
     marginBottom: 5,
+    borderRadius: 4,
   },
 })
