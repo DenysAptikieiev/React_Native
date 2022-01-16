@@ -1,9 +1,8 @@
 import React, {useState} from 'react'
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View, Text, FlatList } from 'react-native';
-import { Navbar } from './src/Navbar';
-import { AppTodo } from './src/AppTodo';
-import { Todo } from './src/Todo';
+import { Navbar } from './src/components/Navbar';
+import { MainScreen } from './src/screens/MainScreen';
  
 export default function App() {
   const [todos, setTodos] = useState([]);
@@ -25,12 +24,7 @@ export default function App() {
       />
       <Navbar title="Todo App!"/>
       <View style={styles.wrappListContainer}>
-        <AppTodo onSubmit={addTodo}/>
-        <FlatList
-          keyExtractor={item => item.id.toString()}
-          data={todos}
-          renderItem={({item}) => <Todo title={item.title}/>}
-        />
+        <MainScreen addTodo={addTodo} todos={todos} removeTodo={removeTodo}/>
       </View>
     </View>
   );
