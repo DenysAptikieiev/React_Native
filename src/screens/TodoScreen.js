@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet, Text} from 'react=native';
+import {View, StyleSheet, Text} from 'react-native';
 
 export const TodoScreen = props => { 
   return (
@@ -11,7 +11,5 @@ export const TodoScreen = props => {
   )
 };
 
-const styles = StyleSheet.create({
-
-})
+const styles = StyleSheet.create({});
 

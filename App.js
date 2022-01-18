@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View, Text, FlatList } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { Navbar } from './src/components/Navbar';
 import { MainScreen } from './src/screens/MainScreen';
  
@@ -15,6 +15,11 @@ export default function App() {
      setTodos(prev => [...prev, newTodo]);
   }
 
+  const removeTodo = id => {
+      console.log(id);
+      setTodos(prev => prev.filter(item => item.id != id));
+  }
+
   return (
     <View style={styles.container}>
       <StatusBar 
@@ -24,7 +29,11 @@ export default function App() {
       />
       <Navbar title="Todo App!"/>
       <View style={styles.wrappListContainer}>
-        <MainScreen addTodo={addTodo} todos={todos} removeTodo={removeTodo}/>
+        <MainScreen 
+          addTodo={addTodo} 
+          todos={todos} 
+          removeTodo={removeTodo}
+        />
       </View>
     </View>
   );

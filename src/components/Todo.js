@@ -1,12 +1,12 @@
 import React from 'react';
 import { View, StyleSheet, Text, TouchableHighlight } from 'react-native';
 
-export const Todo = ({ title }) => {
+export const Todo = ({ id, title, removeTodo }) => {
   return (
     <TouchableHighlight
       activeOpacity={0.6}
       underlayColor="#DDDDDD"
-      onPress={() => alert(title)}>
+      onPress={() => removeTodo(id)}>
       <View style={styles.todo}>
         <Text>{title}</Text>
       </View>
