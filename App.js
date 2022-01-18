@@ -1,40 +1,44 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View } from 'react-native';
 import { Navbar } from './src/components/Navbar';
 import { MainScreen } from './src/screens/MainScreen';
- 
+import { TodoScreen } from './src/screens/TodoScreen';
+
 export default function App() {
   const [todos, setTodos] = useState([]);
+  const [todoId, setTodoId] = useState(null);
 
   const addTodo = title => {
-    const newTodo = { 
+    const newTodo = {
       id: Date.now().toString(),
       title: title,
-     }
-     setTodos(prev => [...prev, newTodo]);
+    }
+    setTodos(prev => [...prev, newTodo]);
   }
 
   const removeTodo = id => {
-      console.log(id);
-      setTodos(prev => prev.filter(item => item.id != id));
+    setTodos(prev => prev.filter(item => item.id != id));
+  }
+
+  let content = (
+    <MainScreen
+      addTodo={addTodo}
+      todos={todos}
+      removeTodo={removeTodo}
+      openTodo={setTodoId}
+    />
+  )
+
+  if (todoId) {
+    const todo = todos.find(item => item.id === todoId);
+    content = <TodoScreen goBack={() => setTodoId(null)} todo={todo}/>
   }
 
   return (
     <View style={styles.container}>
-      <StatusBar 
-        animated={true}
-        hidden={false}
-        statusBarStyle='dark-content'
-      />
-      <Navbar title="Todo App!"/>
-      <View style={styles.wrappListContainer}>
-        <MainScreen 
-          addTodo={addTodo} 
-          todos={todos} 
-          removeTodo={removeTodo}
-        />
-      </View>
+      <Navbar title="Todo App!" />
+      <View style={styles.wrappListContainer}>{content}</View>
     </View>
   );
 }
@@ -46,7 +50,7 @@ const styles = StyleSheet.create({
   },
   wrappListContainer: {
     maxHeight: '80%',
-    justifyContent: 'center', 
+    justifyContent: 'center',
     alignItems: 'center'
   }
 });

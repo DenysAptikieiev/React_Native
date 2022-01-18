@@ -7,6 +7,7 @@ import {
   Alert,
   Pressable,
 } from "react-native";
+import { Button } from '../UI/Button/Button';
 
 export const AppTodo = ({ onSubmit }) => {
   const [value, setValue] = useState("");
@@ -30,12 +31,12 @@ export const AppTodo = ({ onSubmit }) => {
         autoCorrect={false}
         autoCapital="none"
       />
-      <Pressable 
-        style={styles.button}
-        onPress={pressHandler}
-        >
-        <Text style={styles.textBtn}>Add</Text>
-      </Pressable>
+      <Button
+        event={pressHandler}
+        styleButton={styles.button}
+        styleText={styles.textBtn}
+        title="Add"
+      />
     </View>
   );
 };
@@ -58,7 +59,7 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 4,
   },
   button: {
-    justifyContent:  'center',
+    justifyContent: 'center',
     alignItems: 'center',
     borderTopRightRadius: 4,
     borderBottomRightRadius: 4,
