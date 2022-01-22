@@ -1,12 +1,12 @@
 import React from 'react';
 import { View, StyleSheet, Text, TouchableHighlight } from 'react-native';
 
-export const Todo = ({ title }) => {
+export const Todo = ({ id, title, removeTodo, onOpen }) => {
   return (
     <TouchableHighlight
       activeOpacity={0.6}
       underlayColor="#DDDDDD"
-      onPress={() => alert(title)}>
+      onPress={() => onOpen(id)}>
       <View style={styles.todo}>
         <Text>{title}</Text>
       </View>
@@ -16,7 +16,7 @@ export const Todo = ({ title }) => {
 
 const styles = StyleSheet.create({
   todo: {
-    width: 333,
+    width: 350,
     height: 50,
     flexDirection: 'row',
     justifyContent: 'flex-start',
@@ -25,5 +25,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     marginTop: 5,
     marginBottom: 5,
+    borderRadius: 4,
   },
 })
