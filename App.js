@@ -18,6 +18,7 @@ export default function App() {
   }
 
   const removeTodo = id => {
+    console.log(id);
     setTodos(prev => prev.filter(item => item.id != id));
   }
 
@@ -32,7 +33,7 @@ export default function App() {
 
   if (todoId) {
     const todo = todos.find(item => item.id === todoId);
-    content = <TodoScreen goBack={() => setTodoId(null)} todo={todo}/>
+    content = <TodoScreen goBack={() => setTodoId(null)} todo={todo} delete={removeTodo}/>
   }
 
   return (

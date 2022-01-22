@@ -8,6 +8,7 @@ import {
   Pressable,
 } from "react-native";
 import { Button } from '../UI/Button/Button';
+import { THEME } from "../UI/theme";
 
 export const AppTodo = ({ onSubmit }) => {
   const [value, setValue] = useState("");
@@ -66,7 +67,7 @@ const styles = StyleSheet.create({
     width: "20%",
     height: 35,
     color: "#000",
-    backgroundColor: "#4695ed",
+    backgroundColor: THEME.SUCCESS_COLOR,
   },
   textBtn: {
     fontWeight: 'bold',
