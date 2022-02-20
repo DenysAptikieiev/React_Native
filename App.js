@@ -1,13 +1,32 @@
 import React, { useState } from 'react'
-import { StatusBar } from 'expo-status-bar';
 import { Alert, StyleSheet, View } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
+import * as Font from 'expo-font';
+import {AppLoading} from 'expo';
+
 import { Navbar } from './src/components/Navbar';
 import { MainScreen } from './src/screens/MainScreen';
 import { TodoScreen } from './src/screens/TodoScreen';
 
+const loadAplication = async () => {
+  await Font.loadAsync({
+    'roboto-regular': require('./assets/fonts/Roboto-Regular.ttf'),
+    'roboto-bold': require('./assets/fonts/Roboto-Bold.ttf')
+  })
+}
+
 export default function App() {
   const [todos, setTodos] = useState([]);
   const [todoId, setTodoId] = useState(null);
+  const [isReady, setIsReady] = useState(false);
+
+  if(isReady) {
+    return (<AppLoading 
+      startAsync={loadAplication} 
+      onError={error => console.log(error)}
+      onFinish={() => setIsReady(true)}
+      />)
+  }
 
   const addTodo = title => {
     const newTodo = {
@@ -81,7 +100,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#06251E',
   },
   wrappListContainer: {
-    maxHeight: '80%',
+    maxHeight: '90%',
     justifyContent: 'center',
     alignItems: 'center'
   }
