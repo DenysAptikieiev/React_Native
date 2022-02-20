@@ -1,21 +1,50 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import { Button } from '../UI/Button/Button';
 import { THEME } from '../UI/theme.js';
-import { AppCard } from '../UI/AppCard/AppCard'
+import { AppCard } from '../UI/AppCard/AppCard';
+import { ModalScreen } from "../components/ModalScreen";
 
-export const TodoScreen = ({ todo, goBack }) => {
+export const TodoScreen = ({ todo, goBack, onRemove, onSave }) => {
+
+  const [modalVisible, setModalVisible] = useState(false);
+  const saveHandler = title => {
+    onSave(todo.id, title);
+    setModalVisible(false)
+  }
+
   return (
     <View>
+      <ModalScreen
+        visible={modalVisible}
+        closeModal={setModalVisible}
+        value={todo.title}
+        onSave={saveHandler}
+      />
       <AppCard>
         <Text style={styles.todoTitle}>{todo.title}</Text>
-        <Button title={'Edit'} styleButton={styles.editButton} styleText={styles.textBtn}/>
+        <Button
+          title='Edit'
+          styleButton={styles.editButton}
+          styleText={styles.textBtn}
+          event={() => setModalVisible(true)}
+        />
       </AppCard>
 
-        <View style={styles.containerButtons}>
-          <Button title="Back" event={goBack} styleButton={styles.backButton} styleText={styles.textBtn} />
-          <Button title="Delete" styleButton={styles.deleteButton} styleText={styles.textBtn} />
-        </View>
+      <View style={styles.containerButtons}>
+        <Button
+          title="Back"
+          event={() => goBack()}
+          styleButton={styles.backButton}
+          styleText={styles.textBtn}
+        />
+        <Button
+          title="Delete"
+          event={() => onRemove(todo.id)}
+          styleButton={styles.deleteButton}
+          styleText={styles.textBtn}
+        />
+      </View>
     </View>
   )
 };
